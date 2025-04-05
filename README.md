@@ -1,4 +1,5 @@
 # Templates
+
 I need a simple C library that can do HTML-like templates. I seem to write a lot of filters these days and a template for outputing formatted text seems to be the right thing. However, I don't want to write a full parser and state machine. I simply don't want to go to all of that effort. Also, the filters I am writing are in C. Normally I would just do things like that in Python and call it done, but I cannot do that for the projects that I am actually doing for various reasons.
 
 The code that implements this should be easy to embed in another applicaiton or run as a stand-alone program with a stock of facilities to load and render common types of data.
@@ -29,4 +30,13 @@ void render(FILE* out, const char* name) {
 }
 ```
 
-The render function simply takes the data defined in the data structure and renders it to the file pointer, which is the output. 
+The render function simply takes the data defined in the data structure and renders it to the file pointer, which is the output.
+
+## How To
+
+See the files ``main.c`` and ``test1.txt`` for example use.
+
+A tag in the template file has the format of ``{{ name }}``. The name corresponds to an entry in the hash table and the renderer replaces it with the render defined in the corresponding data structure. Spaces are optional. If desired, several names can be placed in a tag, such as ``{{name1 name2 name3}}`` but this is exactly equivalent to placing separate tags in the template. The data and the render function must match, but the data can be NULL if the render function generates the data directly. For example, placing the time and date in a file. The name must be there and it can be used any number of times in the template.
+
+If your application uses FLEX to generate a scanner, be sure to use a name other than ``template``.
+

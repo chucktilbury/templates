@@ -1,0 +1,11 @@
+So here is the high level view of what I am thinking. The template will
+be a text file with a simple tag format that contains a name that has been
+placed in a hash {{asdf}} prior to rendering. The hash table contains a data
+structure that has all of the information needed to render the tag, including
+a function pointer that will {{ pootater asdf asd }} do the actual rendering. That way, the simple
+tag can reference any kind} of data from very simple to very complex. All the
+template driver does is create the hash table and filter the text, executing
+the render function as needed.
+ { {}
+}
+
