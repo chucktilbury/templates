@@ -19,7 +19,7 @@ struct data {
 };
 ```
 
-The code that runs when a tag is recognized in the template mat look like this.
+The code that runs when a tag is recognized in the template might look like this.
 ```
 void render(FILE* out, const char* name) {
   struct data* ptr = find_name(name);
