@@ -2,10 +2,10 @@ TARGET	=	render_test
 DEPS	=	$(TARGET).deps
 CARGS	=	-Wall -g
 CC		= 	clang
-OBJS	=	scanner.o \
+OBJS	=	template.o \
+			render.o \
 			hash.o \
 			alloc.o \
-			template.o \
 			main.o
 
 %.o:%.c
@@ -14,8 +14,8 @@ OBJS	=	scanner.o \
 $(TARGET): $(OBJS) $(DEPS)
 	$(CC) $(CARGS) -o $(TARGET) $(OBJS)
 
-scanner.c scanner.h: scanner.l
-	flex scanner.l
+template.c template.h: template.l
+	flex template.l
 
 $(DEPS): $(OBJS:.o=.c)
 	$(CC) -MM $^ > $(DEPS)
@@ -23,6 +23,6 @@ $(DEPS): $(OBJS:.o=.c)
 include $(DEPS)
 
 clean:
-	$(RM) $(TARGET) $(OBJS) $(DEPS) scanner.c scanner.h test1.out
+	$(RM) $(TARGET) $(OBJS) $(DEPS) template.c template.h test1.out
 
 

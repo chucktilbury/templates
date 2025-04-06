@@ -3,7 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
-#include "template.h"
+#include "render.h"
 #include "errors.h"
 
 static void render_string(FILE* fp, void* data) {

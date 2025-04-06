@@ -3,7 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
-#include "scanner.h"
+#include "render.h"
 #include "template.h"
 #include "alloc.h"
 #include "errors.h"

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "template.h"
+#include "render.h"
 
 char template_buffer[1024];
 
@@ -13,8 +13,8 @@ char template_buffer[1024];
 %option noinput
 %option nounput
 %option noyywrap
-%option header-file="scanner.h"
-%option outfile="scanner.c"
+%option header-file="template.h"
+%option outfile="template.c"
 %option prefix="template_"
 
 %x NAME
