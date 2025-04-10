@@ -6,6 +6,11 @@
 #include "render.h"
 #include "errors.h"
 
+static void recur_render(FILE* fp, void* data) {
+
+    render("test2.txt", fp, data);
+}
+
 static void render_string(FILE* fp, void* data) {
 
     fprintf(fp, "%s", (const char*)data);
@@ -13,33 +18,25 @@ static void render_string(FILE* fp, void* data) {
 
 int main(int argc, char** argv) {
 
-    const char* infn = "test1.txt";
-    const char* outfn = "test1.out";
+    render_table_t* ptr = create_render();
 
-    FILE* inf = fopen(infn, "r");
-    ASSERT(inf != NULL, "cannot open input file: \"%s\": %s\n", infn, strerror(errno));
-    FILE* outf = fopen(outfn, "w");
-    ASSERT(outf != NULL, "cannot open output file: \"%s\": %s\n", infn, strerror(errno));
-
-    template_t* ptr = create_render(inf, outf);
-
-    template_item_t item1 = {
+    render_item_t item1 = {
         "pootater",
-        (void*)"NOW ",
+        (void*)"NOW",
         render_string
     };
 
     add_render(ptr, &item1);
 
-    template_item_t item2 = {
+    render_item_t item2 = {
         "asdf",
-        (void*)"IS THE ",
+        (void*)"IS THE",
         render_string
     };
 
     add_render(ptr, &item2);
 
-    template_item_t item3 = {
+    render_item_t item3 = {
         "asd",
         (void*)"TIME!",
         render_string
@@ -47,7 +44,26 @@ int main(int argc, char** argv) {
 
     add_render(ptr, &item3);
 
-    render(ptr);
+    render_item_t item4 = {
+        "recursive",
+        (void*)ptr,
+        recur_render
+    };
+
+    add_render(ptr, &item4);
+
+    render_item_t item5 = {
+        "pasd",
+        (void*)"OPTIONAL",
+        render_string
+    };
+
+
+    add_render(ptr, &item5);
+
+    FILE* outf = fopen("test1.out", "w");
+
+    render("test1.txt", outf, ptr);
 
     return 0;
 }
