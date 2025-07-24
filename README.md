@@ -30,7 +30,7 @@ void render(FILE* out, const char* name) {
 }
 ```
 
-The render function simply takes the data defined in the data structure and renders it to the file pointer, which is the output.
+The render function simply takes the data defined in the data structure and renders it to the file pointer, which is the output. Templates can be expanded recursively or by iteration. 
 
 ## How To
 
@@ -39,4 +39,6 @@ See the files ``main.c`` and ``test1.txt`` for example use.
 A tag in the template file has the format of ``{{ name }}``. The name corresponds to an entry in the hash table and the renderer replaces it with the render defined in the corresponding data structure. Spaces are optional. If desired, several names can be placed in a tag, such as ``{{name1 name2 name3}}`` but this is exactly equivalent to placing separate tags in the template. The data and the render function must match, but the data can be NULL if the render function generates the data directly. For example, placing the time and date in a file. The name must be there and it can be used any number of times in the template.
 
 If your application uses FLEX to generate a scanner, be sure to use a name other than ``template``.
+
+For a more detail use example, look at my github [parser_template_generator](https://github.com/chucktilbury/parser_template_generator/tree/main)
 
